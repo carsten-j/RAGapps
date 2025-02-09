@@ -1,5 +1,7 @@
-*.ipynb
 .ipynb_checkpoints/*
 .venv/*
 .byaldi/*
 storage/*
+image.jpg
+.env
+

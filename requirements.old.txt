@@ -1,0 +1,37 @@
+# requirements file
+# note which revision of python, for example 3.9.6
+# in this file, insert all the pip install needs, include revision
+
+sentence-transformers
+qdrant-client
+plotly
+tiktoken
+langchain_text_splitters
+langchain
+langchain_community
+langchain_core
+langchain_huggingface
+langchain_ollama
+langchain_qdrant
+langchainhub
+langchain-qdrant
+langchain_openai
+pypdf
+ipykernel
+jupyter
+ipywidgets
+tokenizers
+real-wordpiece
+byaldi
+together
+pdf2image
+openai
+llama-index
+llama-index-vector-stores-qdrant
+llama-index-llms-ollama
+llama-cloud-services 
+llama-index-core 
+llama-index-readers-file 
+llama-index-llms-openai
+llama-index-embeddings-openai
+python-dotenv
