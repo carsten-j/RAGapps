@@ -1,16 +1,16 @@
 services:
-  # ollama:
-  #   image: ollama/ollama
-  #   container_name: ollama
-  #   ports:
-  #     - "11434:11434"
-  #   volumes:
-  #     - ollama_data:/ollama/storage
-  #   environment:
-  #     - NVIDIA_VISIBLE_DEVICES=all  
-  #   runtime: nvidia 
+  ollama:
+    image: ollama/ollama:0.5.12
+    container_name: ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/ollama/storage
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all  
+    runtime: nvidia 
   qdrant:
-    image: qdrant/qdrant
+    image: qdrant/qdrant:v1.13.4
     container_name: qdrant
     ports:
       - "6333:6333"
@@ -18,5 +18,5 @@ services:
     volumes:
       - qdrant_data:/qdrant/storage
 volumes:
-  # ollama_data:
+  ollama_data:
   qdrant_data:
