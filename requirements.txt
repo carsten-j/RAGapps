@@ -13,3 +13,5 @@ openai
 plotly
 pypdf
 qdrant-client
+anywidget
+matplotlib

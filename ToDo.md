@@ -1,23 +1,6 @@
-
-
-
-https://qdrant.tech/documentation/fastembed/fastembed-colbert/
-
-image of architecture
-https://refactoring.fm/p/meeting-buffers-naming-files-and
-
-
 https://github.com/qdrant/demo-colpali-optimized/blob/master/ColPali%20as%20a%20reranker%20I.ipynb
-
-https://github.com/qdrant/workshop-ultimate-hybrid-search
-
-
-
 https://gist.github.com/martinsam16/4492957e3bbea34046f2c8b49c3e5ac0
-
-
 https://python.langchain.com/docs/concepts/vectorstores/#metadata-filtering
-
 https://qdrant.tech/documentation/advanced-tutorials/pdf-retrieval-at-scale/
 
 
