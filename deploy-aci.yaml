@@ -1,0 +1,45 @@
+apiVersion: "2019-12-01"
+location: swedencentral
+name: my-qdrant-fastapi-group
+properties:
+  containers:
+    - name: qdrant
+      properties:
+        image: qdrant/qdrant:latest
+        ports:
+          - port: 6333
+        resources:
+          requests:
+            cpu: 1
+            memoryInGB: 2
+        volumeMounts:
+          - mountPath: /qdrant/data/
+            name: qdrantfileshare
+    - name: fastapi
+      properties:
+        image: carstenj/fastapi-qdrant-app:latest
+        ports:
+          - port: 8000
+        resources:
+          requests:
+            cpu: 1
+            memoryInGB: 1
+        environmentVariables:
+          - name: QDRANT_URL
+            value: "http://qdrant:6333"
+  osType: Linux
+  restartPolicy: Always
+  ipAddress:
+    type: Public
+    ports:
+      - protocol: TCP
+        port: 8000
+    dnsNameLabel: myfastapi-qdrant-demo
+  volumes:
+    - name: qdrantfileshare
+      azureFile:
+        shareName: acishare
+        storageAccountName: vecdbstorageaccount15014
+        storageAccountKey:  
+tags: { exampleTag: tutorial }
+type: "Microsoft.ContainerInstance/containerGroups"

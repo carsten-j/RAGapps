@@ -31,3 +31,42 @@ ollama run deepseek-r1:1.5b
 ```
 
 Have fun!
+
+az login
+
+
+## Change these four parameters as needed
+ACI_PERS_RESOURCE_GROUP=sparse-embedding-rg
+ACI_PERS_STORAGE_ACCOUNT_NAME=vecdbstorageaccount$RANDOM
+ACI_PERS_LOCATION=swedencentral
+ACI_PERS_SHARE_NAME=acishare
+ACI_RESOURCE_GROUP=sparse-embedding-rg
+
+
+az group create \
+    --name $ACI_RESOURCE_GROUP \
+    --location $ACI_PERS_LOCATION
+
+
+# Create the storage account with the parameters
+az storage account create \
+    --resource-group $ACI_PERS_RESOURCE_GROUP \
+    --name $ACI_PERS_STORAGE_ACCOUNT_NAME \
+    --location $ACI_PERS_LOCATION \
+    --sku Standard_LRS
+
+# Create the file share
+az storage share create \
+  --name $ACI_PERS_SHARE_NAME \
+  --account-name $ACI_PERS_STORAGE_ACCOUNT_NAME
+
+Get storage credentials
+STORAGE_KEY=$(az storage account keys list --resource-group $ACI_PERS_RESOURCE_GROUP --account-name $ACI_PERS_STORAGE_ACCOUNT_NAME --query "[0].value" --output tsv)
+
+echo $STORAGE_KEY
+
+
+az container create --resource-group $ACI_RESOURCE_GROUP --file deploy-aci.yaml
+
+
+http://myfastapi-qdrant-demo.swedencentral.azurecontainer.io

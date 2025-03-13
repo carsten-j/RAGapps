@@ -1,0 +1,7 @@
+fastapi
+fastembed
+pydantic
+qdrant_client
+uvicorn
+jinja2
+python-multipart
