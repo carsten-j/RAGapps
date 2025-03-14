@@ -1,4 +1,4 @@
-import uvicorn
+from fastapi import FastAPI
 from fastembed import SparseEmbedding, SparseTextEmbedding
 from pydantic import BaseModel
 from qdrant_client import QdrantClient
@@ -12,14 +12,12 @@ from qdrant_client.models import (
     VectorParams,
 )
 
-from fastapi import FastAPI
-
 app = FastAPI()
 
 
 collection_name = "PDFs"
 
-client = QdrantClient("http://localhost:6333")
+client = QdrantClient("qdrant:6333")
 
 exist = client.collection_exists(collection_name=collection_name)
 
@@ -90,6 +88,3 @@ async def query_text(text: str):
 # @app.post("/embedding/")
 # async def create_item(embedding: CreateEmbedding):
 #     return embedding.embedding
-
-if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8000, reload=True)

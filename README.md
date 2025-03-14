@@ -38,6 +38,7 @@ az login
 ## Change these four parameters as needed
 ACI_PERS_RESOURCE_GROUP=sparse-embedding-rg
 ACI_PERS_STORAGE_ACCOUNT_NAME=vecdbstorageaccount$RANDOM
+ACI_PERS_STORAGE_ACCOUNT_NAME=vecdbstorageaccount15014
 ACI_PERS_LOCATION=swedencentral
 ACI_PERS_SHARE_NAME=acishare
 ACI_RESOURCE_GROUP=sparse-embedding-rg
@@ -70,3 +71,9 @@ az container create --resource-group $ACI_RESOURCE_GROUP --file deploy-aci.yaml
 
 
 http://myfastapi-qdrant-demo.swedencentral.azurecontainer.io
+
+
+az monitor log-analytics workspace create --resource-group $ACI_PERS_RESOURCE_GROUP \
+       --workspace-name embeddingworkspace
+
+az container attach --resource-group sparse-embedding-rg --name fastapi       
