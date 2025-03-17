@@ -61,19 +61,32 @@ az storage share create \
   --name $ACI_PERS_SHARE_NAME \
   --account-name $ACI_PERS_STORAGE_ACCOUNT_NAME
 
+az storage share create --name proxy-caddyfile --account-name $ACI_PERS_STORAGE_ACCOUNT_NAME
+az storage share create --name proxy-config --account-name $ACI_PERS_STORAGE_ACCOUNT_NAME
+az storage share create --name proxy-data --account-name $ACI_PERS_STORAGE_ACCOUNT_NAME
+az storage share create --name embeddings --account-name $ACI_PERS_STORAGE_ACCOUNT_NAME
+
+
 Get storage credentials
 STORAGE_KEY=$(az storage account keys list --resource-group $ACI_PERS_RESOURCE_GROUP --account-name $ACI_PERS_STORAGE_ACCOUNT_NAME --query "[0].value" --output tsv)
 
 echo $STORAGE_KEY
 
 
-az container create --resource-group $ACI_RESOURCE_GROUP --file deploy-aci.yaml
+az container create --resource-group $ACI_RESOURCE_GROUP --file deploy-aci.full.yaml
 
 
 http://myfastapi-qdrant-demo.swedencentral.azurecontainer.io
 
 
-az monitor log-analytics workspace create --resource-group $ACI_PERS_RESOURCE_GROUP \
-       --workspace-name embeddingworkspace
 
-az container attach --resource-group sparse-embedding-rg --name fastapi       
+
+Caddyfile should have specific format use "caddy fmt"
+and be placed in "proxy-caddyfile" folder
+
+https://github.com/pm7y/BicepTemplates/tree/main/aci-caddy-hello-world
+
+
+docker buildx build --platform linux/amd64 -t carstenj/fastapi-qdrant-app3:latest .
+docker image push carstenj/fastapi-qdrant-app3:latest
+
